@@ -1,0 +1,70 @@
+<HTML>
+  <head></head>
+  <body>
+    <div class="container">
+      <h1>Hello ANisa</h1>
+
+      <!-- <img [src]="imgSrc" class="img-fluid" /> -->
+
+      <h3 [innerHTML]="address" [style.color]="color"></h3>
+      <h3 [innerHTML]="address" [ngStyle]="gaya"></h3>
+
+      <h1>{{ angka }}</h1>
+
+      <input type="text" (change)="ontyping($event)">
+
+      <button (click)="increement()">klik</button>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li ngbNavItem>
+          <button ngbNavLink>First</button>
+          <ng-template ngbNavContent>First content</ng-template>
+        </li>
+        <li ngbNavItem>
+          <button ngbNavLink>Second</button>
+          <ng-template ngbNavContent>Second content</ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+
+      
+      <h2>TO DO</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">$</th>
+            <th scope="col">Todo</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let n of dataTodo; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <!-- <p *ngIf="" -->
+               <p *ngIf="n.status== false; else hasilTag" >  
+                <del> {{ n.todo }}</del> </p>
+                <ng-template #hasilTag> {{ n.todo }} </ng-template>
+                
+
+              <!-- <p *ngIf="(n.status == true)">  
+                {{ n.todo }}</p> -->
+            </td>
+            <td>
+              <p *ngIf="(n.status == false)" style="text-decoration: line-through;">  
+             {{ n.desc }}</p>
+             <p *ngIf="(n.status == true)">  
+               {{ n.desc }}</p>
+           </td>
+          
+            <td> 
+              <button *ngIf="(n.status)" (click)="janganCoret(i)"   class="btn btn-sm btn-primary">done</button>
+              <button (click)="janganCoret(i)" class="btn btn-sm btn-warning">cansel</button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </body>
+</HTML>

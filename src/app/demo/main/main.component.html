@@ -1,0 +1,14 @@
+<br>  <br>  
+
+<h2>main.component </h2>
+
+<input type="text" (ngModel)="KirimkechildTitle"> 
+
+<h3>Click count: {{clickCount}} </h3>  
+
+<h3>Child name: {{name}} </h3>  
+
+
+
+<app-child [title]="KirimkechildTitle" (onChanged)="onCountChanged($event)" (childName)="name">
+</app-child>

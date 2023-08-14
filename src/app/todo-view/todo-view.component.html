@@ -1,0 +1,67 @@
+<div class="bg-image">
+    <nav class="navbar bg-gradient">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-2"><h3>Welcome {{username}}</h3></a>
+            <button class="btn btn-danger me-2" (click)="logout()">Logout</button>
+        </div>
+    </nav>
+    <div class="container d-flex align-items-center">
+        <div class="d-flex m-auto justify-content-center col-12">
+            <div class="card w-50">
+                <img src="../../assets/images/todo.jpeg" class="card-img-top" alt="todo img">
+                <div class="card-header d-flex align-items-center justify-content-center">
+                    <h1>TODO APP</h1>
+                </div>
+                <div class="card-body ">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Title" aria-label="Username"
+                               aria-describedby="basic-addon1" (input)="titleHandler($event)" [value]="title">
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Description"
+                                  (input)="descriptionHandler($event)" [value]="description" maxlength="50"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="button" class="btn btn-primary d-flex" (click)="onSubmit()"
+                                [disabled]="!isAddDisable">Add
+                            Todo
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card ms-5 h-auto" style="width: 100rem">
+                <div class="card-header d-flex align-items-center justify-content-center">
+                    <h1>My TODO</h1>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center" *ngIf="myTodo.length<=0">
+                        <h3>Todo Still Empty</h3>
+                    </div>
+                    <table class="table" *ngIf="myTodo.length>0">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let todo of myTodo; let i = index">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td [ngClass]="{'strikethrough': !todo.isDone}">{{ todo.title }}</td>
+                            <td [ngClass]="{'strikethrough': !todo.isDone}">{{ todo.description }}</td>
+                            <td class="justify-content-center d-flex">
+                                <button type="button" class="btn btn-warning btn-sm"
+                                        (click)="onDone(i)">{{todo.isDone ? "Done" : "Cancel"}}</button>
+                                <button type="button" class="btn btn-danger btn-sm ms-3" (click)="onDelete(i)">Delete
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
